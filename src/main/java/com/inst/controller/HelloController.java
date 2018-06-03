@@ -1,4 +1,4 @@
-package com.inst;
+package com.inst.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
