@@ -1,9 +1,13 @@
 package com.inst.entity;
 
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import java.io.IOException;
+import java.sql.Blob;
 import java.util.Collection;
 import java.util.Set;
 
@@ -12,7 +16,7 @@ import java.util.Set;
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "email")
@@ -26,6 +30,11 @@ public class User implements UserDetails {
 
     @Transient
     private Set<GrantedAuthority> authorities;
+
+    @Lob
+    @Column(name = "avatar")
+    private String avatar;
+
 
     public int getId() {
         return id;
@@ -59,6 +68,8 @@ public class User implements UserDetails {
         this.gender = gender;
     }
 
+
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
@@ -87,6 +98,19 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public void setAvatar(MultipartFile image) throws IOException {
+        byte[] encode  = Base64.encodeBase64(image.getBytes());
+        avatar = new String(encode);
     }
 
     @Override

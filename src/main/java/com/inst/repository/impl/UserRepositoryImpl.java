@@ -23,4 +23,16 @@ public class UserRepositoryImpl implements UserRepository {
         return (User) sessionFactory.getCurrentSession()
                 .createQuery("from User where email=:email").setParameter("email", email).uniqueResult();
     }
+
+    @Override
+    @Transactional
+    public void create(User user) {
+        sessionFactory.getCurrentSession().save(user);
+    }
+
+    @Override
+    @Transactional
+    public User findById(int id) {
+        return sessionFactory.getCurrentSession().get(User.class, id);
+    }
 }
