@@ -7,18 +7,26 @@
   <div class="container">
     <h3>Sign Up</h3>
     <form method="POST" action="registration" encType="multipart/form-data">
-      <%--Login--%>
-      <%--<input type="text" name="login" required>--%>
-      <label for="gender">Gender</label>
-        <input type="text" id="gender" name="gender" required>
-      <label for="password">Password</label>
-      <input type="text" id="password" name="password" required>
-      <label for="email">E-mail</label>
-        <input type="text" id="email" name="email" required>
-      Choose avatar:
-      <br>
-      <input type="file" name="avatar" accept="image/*"/>
-      <input type="submit" name="createAccount" value="Create">
+      <table>
+      <tr>
+        <td><label for="email">E-mail</label></td>
+        <td><input type="text" id="email" name="email" required></td>
+      </tr>
+      <tr>
+        <td><label for="password">Password</label></td>
+        <td><input type="text" id="password" name="password" required></td>
+      </tr>
+      <td>Gender:</td>
+        <td><input type="radio" name="gender" value="m">Male</td>
+        <td><input type="radio" name="gender" value="f">Female</td>
+      </tr>
+      <tr>
+        <td><label for="avatar">Choose avatar:</label></td>
+        <td><input type="file" name="avatar" id="avatar" accept="image/*"/></td>
+      </tr>
+      <tr>
+        <td><input type="submit" name="createAccount" value="Sign up"></td>
+      </tr>
     </form>
   </div>
 </div>

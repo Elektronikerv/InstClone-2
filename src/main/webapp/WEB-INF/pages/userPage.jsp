@@ -15,6 +15,13 @@
     <td><h2>${user.email}</h2></td>
   </tr>
 </table>
+<form action="/addImage" method="post" enctype="multipart/form-data">
+  <input type="file" name="newImage" id="newImage" accept="image/*"/>
+  <input type="submit" value="add"/>
+</form>
 
+  <c:forEach items="${user.images}" var="image">
+    <img class="img-circle" src="data:image/jpeg;base64,${image.content}" height="300" width="300"/>
+  </c:forEach>
 </body>
 </html>
