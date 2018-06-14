@@ -8,7 +8,9 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.persistence.*;
 import java.io.IOException;
 import java.sql.Blob;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -35,6 +37,8 @@ public class User implements UserDetails {
     @Column(name = "avatar")
     private String avatar;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    private List<Image> images;
 
     public int getId() {
         return id;
@@ -67,8 +71,6 @@ public class User implements UserDetails {
     public void setGender(String gender) {
         this.gender = gender;
     }
-
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -111,6 +113,20 @@ public class User implements UserDetails {
     public void setAvatar(MultipartFile image) throws IOException {
         byte[] encode  = Base64.encodeBase64(image.getBytes());
         avatar = new String(encode);
+    }
+
+    public void addImage(Image image) {
+        if (images == null)
+            images = new ArrayList<>();
+        images.add(image);
+    }
+
+    public List<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Image> images) {
+        this.images = images;
     }
 
     @Override
