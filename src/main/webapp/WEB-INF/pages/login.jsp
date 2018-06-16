@@ -1,28 +1,43 @@
-
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
-    <title>InstClone</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" href="/resources/css/bootstrap.min.css"/>
 </head>
-<body>
-  <h3>Sign in</h3>
-  <form action="login" method="post">
-    <table>
-      <tr>
-        <td><label for="username">Email</label></td>
-        <td><input type="text" name="username" id="username"/></td>
-      </tr>
-      <tr>
-        <td><label for="password">Password</label></td>
-        <td><input type="password" name="password" id="password"/></td>
-      </tr>
-      <tr>
-        <td><input type="submit" value="Log in"></td>
-      </tr>
-      <tr>
-        <td><a href="/registration">Sign up</a></td>
-      </tr>
-    </table>
-  </form>
+
+<%@include file="navbar.jsp" %>
+<body style="background: #6f472f">
+<div class="container">
+  <div class="col-lg-4"></div>
+  <div class="col-lg-4">
+    <div class="jumbotron" style="margin-top: 100px; ">
+      <h2 class="text-center">Login</h2>
+      <form action="login" method='POST'>
+        <div class=" form-group">
+          <c:if test="${param.error ne null}">
+            <div style="color: red">Invalid username or password</div>
+          </c:if>
+          <label for='username'>User:</label>
+          <div>
+            <input type='text' class="form-control" id="username" name='username' value=''>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for='password'>Password:</label>
+          <div>
+            <input type='password' class="form-control" id='password' name='password'/>
+          </div>
+        </div>
+        <div>
+          <input name="submit" class="btn btn-success form-control" type="submit" value="Log in"/>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="col-lg-4"></div>
+</div>
 </body>
 </html>

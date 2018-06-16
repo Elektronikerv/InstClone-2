@@ -3,25 +3,33 @@
 
 <html>
 <head>
+  <link rel="stylesheet" href="/resources/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="/resources/css/page.css"/>
   <title>InstClone | ${user.email}</title>
 </head>
 <body>
+<jsp:include page="navbar.jsp"/>
+<div class="container-fluid">
+<div>
+  <div class="row">
+    <div class="col-md-2"><img class="img-circle" src="data:image/jpeg;base64,${user.avatar}"
+         title="change avatar" height="150" width="150"  hspace="20" vspace="20">
+  </div>
+    <div class="col-md-1 col-offset-3 name">
+    <h2>${user.email}</h2></div>
+  </div>
+</div>
 
-
-<table>
-  <tr>
-      <img class="img-circle" src="data:image/jpeg;base64,${user.avatar}" title="change avatar" height="150" width="150"  hspace="20" vspace="20">
-    </a></td>
-    <td><h2>${user.email}</h2></td>
-  </tr>
-</table>
-<form action="/addImage" method="post" enctype="multipart/form-data">
-  <input type="file" name="newImage" id="newImage" accept="image/*"/>
-  <input type="submit" value="add"/>
+<form action="/addImage" class="form-inline" method="post" enctype="multipart/form-data">
+  <div class="form-group">
+    <input type="file"  name="newImage" id="newImage" accept="image/*"/>
+    <input class="btn btn-default" type="submit" value="add"/>
+  </div>
 </form>
 
   <c:forEach items="${user.images}" var="image">
-    <img class="img-circle" src="data:image/jpeg;base64,${image.content}" height="300" width="300"/>
+    <img src="data:image/jpeg;base64,${image.content}" height="300" width="300"/>
   </c:forEach>
+  </div>
 </body>
 </html>
