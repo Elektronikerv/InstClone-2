@@ -7,7 +7,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import java.io.IOException;
-import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -37,7 +36,9 @@ public class User implements UserDetails {
     @Column(name = "avatar")
     private String avatar;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user",
+               cascade = CascadeType.ALL,
+               fetch = FetchType.EAGER)
     private List<Image> images;
 
     public int getId() {
