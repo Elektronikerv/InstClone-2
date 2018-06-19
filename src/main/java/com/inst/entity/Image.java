@@ -1,10 +1,12 @@
 package com.inst.entity;
 
 import org.apache.commons.codec.binary.Base64;
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import java.io.IOException;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "images")
@@ -21,6 +23,10 @@ public class Image {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @Column(name = "created_on")
+    @CreationTimestamp
+    private Timestamp createdOn;
 
     public int getId() {
         return id;
@@ -51,6 +57,7 @@ public class Image {
         this.user = user;
     }
 
-
-
+    public Timestamp getCreatedOn() {
+        return createdOn;
+    }
 }
