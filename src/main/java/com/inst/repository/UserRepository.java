@@ -3,8 +3,12 @@ package com.inst.repository;
 
 import com.inst.entity.User;
 
+import java.util.List;
+
 public interface UserRepository {
-    User findUserByEmail(String email);
+    User findUserByLogin(String login);
+
+    List<User> searchUsersByLogin(String login);
 
     void create(User user);
 

@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Repository
 public class UserRepositoryImpl implements UserRepository {
 
@@ -19,9 +21,17 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     @Transactional
-    public User findUserByEmail(String email) {
+    public User findUserByLogin(String login) {
         return (User) sessionFactory.getCurrentSession()
-                .createQuery("from User where email=:email").setParameter("email", email).uniqueResult();
+                .createQuery("from User where login=:login").setParameter("login", login).uniqueResult();
+    }
+
+    @Override
+    @Transactional
+    public List<User> searchUsersByLogin(String login) {
+        return (List<User>)sessionFactory.getCurrentSession()
+                .createQuery("from User where login LIKE :login")
+                .setParameter("login", "%" + login + "%").list();
     }
 
     @Override
