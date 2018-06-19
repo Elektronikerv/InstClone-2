@@ -5,7 +5,7 @@
 <head>
   <link rel="stylesheet" href="/resources/css/bootstrap.min.css"/>
   <link rel="stylesheet" href="/resources/css/page.css"/>
-  <title>InstClone | ${user.email}</title>
+  <title>InstClone | ${user.login}</title>
 </head>
 <body>
 <jsp:include page="navbar.jsp"/>
@@ -16,7 +16,7 @@
          title="change avatar" height="150" width="150"  hspace="20" vspace="20">
   </div>
     <div class="col-md-1 col-offset-3 name">
-    <h2>${user.email}</h2></div>
+    <h2>${user.login}</h2></div>
   </div>
 </div>
 

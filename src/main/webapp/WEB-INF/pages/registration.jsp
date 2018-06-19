@@ -19,11 +19,20 @@
     <form method="POST" action="registration" encType="multipart/form-data">
 
       <div class="form-group">
-          <label for="email">E-mail</label>
-          <input class="form-control" type="text" id="email" name="email" required>
+          <label for="login">Login</label>
+          <input class="form-control" type="text" id="login" name="login" required>
+        </div>
+
+        <div class="form-group">
+            <label for="firstName">First name</label>
+            <input class="form-control" type="text" id="firstName" name="firstName" required>
+        </div>
+
+        <div class="form-group">
+            <label for="lastName">Last name</label>
+            <input class="form-control" type="text" id="lastName" name="lastName" required>
         </div>
       <div class="form-group">
-
           <label for="password">Password</label>
           <input type="password" class="form-control" id="password" name="password" required>
       </div>
