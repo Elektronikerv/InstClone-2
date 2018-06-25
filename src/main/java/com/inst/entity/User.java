@@ -7,10 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "users")
@@ -46,6 +43,28 @@ public class User implements UserDetails {
                cascade = CascadeType.ALL,
                fetch = FetchType.EAGER)
     private List<Image> images;
+
+
+    @ManyToMany(fetch = FetchType.EAGER,
+                cascade = {CascadeType.MERGE, CascadeType.PERSIST,
+                    CascadeType.REFRESH, CascadeType.DETACH})
+    @JoinTable(
+            name="user_subscriptions",
+            joinColumns = @JoinColumn(name = "follower_id"),
+            inverseJoinColumns = @JoinColumn(name = "following_id")
+    )
+    private Set<User> following;
+
+    @ManyToMany(fetch = FetchType.EAGER,
+                cascade = {CascadeType.MERGE, CascadeType.PERSIST,
+                    CascadeType.REFRESH, CascadeType.DETACH})
+    @JoinTable(
+            name="user_subscriptions",
+            joinColumns = @JoinColumn(name = "following_id"),
+            inverseJoinColumns = @JoinColumn(name = "follower_id")
+    )
+    private Set<User> followers;
+
 
     public int getId() {
         return id;
@@ -162,4 +181,32 @@ public class User implements UserDetails {
         this.lastName = lastName;
     }
 
+    public Set<User> getFollowing() {
+        return following;
+    }
+
+    public void setFollowing(Set<User> following) {
+        this.following = following;
+    }
+
+    public Set<User> getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(Set<User> followers) {
+        this.followers = followers;
+    }
+
+    public void addFollower(User user) {
+        if(followers == null)
+            followers = new HashSet<>();
+        followers.add(user);
+    }
+
+
+    public void addFollowing(User user) {
+        if(following == null)
+            following = new HashSet<>();
+        following.add(user);
+    }
 }
