@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -38,5 +39,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> searchUsersByLogin(String login) {
         return userRepository.searchUsersByLogin(login);
+    }
+
+    @Override
+    @Transactional
+    public void subscribe(User currentUser, User user) {
+        currentUser = userRepository.findById(currentUser.getId());
+
+        if (currentUser != null) {
+            currentUser.addFollowing(user);
+        }
     }
 }

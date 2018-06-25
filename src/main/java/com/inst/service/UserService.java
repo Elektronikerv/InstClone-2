@@ -13,4 +13,6 @@ public interface UserService extends UserDetailsService {
     User findById(int id);
 
     List<User> searchUsersByLogin(String login);
+
+    void subscribe(User currentUser, User user);
 }
