@@ -34,6 +34,9 @@ public class UserController {
 	private ImageService imageService;
 
 	@Autowired
+	private SessionFactory sessionFactory;
+
+	@Autowired
 	public UserController(UserService userService, ImageService imageService) {
 		this.userService = userService;
 		this.imageService = imageService;
@@ -41,7 +44,8 @@ public class UserController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String page(@AuthenticationPrincipal User user, Model model) {
-//		User user = (User) userService.loadUserByUsername(principal.getName());
+		user = userService.findById(user.getId());
+		model.addAttribute("currentUser", user);
 		model.addAttribute("user", user);
 		return "userPage";
 	}
@@ -77,14 +81,11 @@ public class UserController {
 	}
 
 	@RequestMapping("/addImage")
-	public String addImage(@RequestParam("newImage") MultipartFile file, Principal principal) throws IOException {
-		User user = (User) userService.loadUserByUsername(principal.getName());
-
+	public String addImage(@AuthenticationPrincipal User user,
+						   @RequestParam("newImage") MultipartFile file) throws IOException {
 		Image image = new Image();
 		image.setContent(file);
-
 		image.setUser(user);
-		
 		imageService.create(image);
 
 		return "redirect:/";
@@ -93,8 +94,49 @@ public class UserController {
 	@RequestMapping("/search")
 	public String getUsersList(@RequestParam("searchUserLogin") String login, Model model) {
 		List<User> users = userService.searchUsersByLogin(login);
-
 		model.addAttribute("users", users);
+		return "usersList";
+	}
+
+	@RequestMapping("/user/{id}")
+	public String getUser(@PathVariable("id") String id,
+						  @AuthenticationPrincipal User currentUser,
+						  Model model) {
+
+		User user = userService.findById(Integer.parseInt(id));
+
+		model.addAttribute("currentUser", currentUser);
+		model.addAttribute("user", user);
+		return "userPage";
+	}
+
+	@RequestMapping("/user/follow/{id}")
+	public String follow(@PathVariable("id") String id,
+						  @AuthenticationPrincipal User currentUser,
+						  Model model) {
+		User user = userService.findById(Integer.parseInt(id));
+		userService.subscribe(currentUser, user);
+
+		currentUser = userService.findById(currentUser.getId());
+
+		model.addAttribute("currentUser", currentUser);
+		model.addAttribute("user", user);
+
+		return "userPage";
+	}
+
+	@RequestMapping("/user/{id}/{type}")
+	public String getList(@PathVariable("id") String id,
+						  @PathVariable("type") String type,
+						  Model model) {
+
+		User user =  userService.findById(Integer.parseInt(id));
+
+		if (type.equals("followers"))
+			model.addAttribute("users", user.getFollowers());
+		else if(type.equals("following"))
+			model.addAttribute("users", user.getFollowing());
+
 		return "usersList";
 	}
 }
