@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -49,5 +50,26 @@ public class UserServiceImpl implements UserService {
         if (currentUser != null) {
             currentUser.addFollowing(user);
         }
+    }
+
+    @Override
+    @Transactional
+    public void unsubscribe(User currentUser, User user) {
+        currentUser = userRepository.findById(currentUser.getId());
+        user = userRepository.findById(user.getId());
+
+        currentUser.getFollowing().remove(user);
+        user.getFollowers().remove(currentUser);
+    }
+
+
+    //    to deal with a hibernate contains method in persistSet bug
+    @Override
+    public boolean contains(Collection<User> list, User user) {
+        for (User u : list) {
+            if( u.equals(user))
+                return true;
+        }
+        return false;
     }
 }
