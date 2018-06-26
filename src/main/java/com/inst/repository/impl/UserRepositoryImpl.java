@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository
+@Transactional
 public class UserRepositoryImpl implements UserRepository {
 
     private SessionFactory sessionFactory;
@@ -20,14 +21,12 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    @Transactional
     public User findUserByLogin(String login) {
         return (User) sessionFactory.getCurrentSession()
                 .createQuery("from User where login=:login").setParameter("login", login).uniqueResult();
     }
 
     @Override
-    @Transactional
     public List<User> searchUsersByLogin(String login) {
         return (List<User>)sessionFactory.getCurrentSession()
                 .createQuery("from User where login LIKE :login")
@@ -35,14 +34,17 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    @Transactional
     public void create(User user) {
         sessionFactory.getCurrentSession().save(user);
     }
 
     @Override
-    @Transactional
     public User findById(int id) {
         return sessionFactory.getCurrentSession().get(User.class, id);
+    }
+
+    @Override
+    public void delete(User user) {
+        sessionFactory.getCurrentSession().delete(user);
     }
 }

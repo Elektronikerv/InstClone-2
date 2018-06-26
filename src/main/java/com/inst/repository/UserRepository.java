@@ -13,4 +13,6 @@ public interface UserRepository {
     void create(User user);
 
     User findById(int id);
+
+    void delete(User user);
 }

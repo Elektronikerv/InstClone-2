@@ -15,8 +15,8 @@
         <div class="col-md-2"><img class="img-circle" src="data:image/jpeg;base64,${searchUser.avatar}"
                                  title="change avatar" height="100" width="100"  hspace="20" vspace="20">
         </div>
-        <div class="col-md-1 name">
-          <h5>${searchUser.login}</h5></div>
+        <div class="col-md-1 ">
+          <h4 style="margin-top: 50px">${searchUser.login}</h4></div>
           </a>
         </div>
     </div>

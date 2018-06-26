@@ -209,4 +209,18 @@ public class User implements UserDetails {
             following = new HashSet<>();
         following.add(user);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj)
+            return true;
+        if (obj == null || this.getClass() != obj.getClass())
+            return false;
+
+        User user = (User) obj;
+        if (this.id == user.getId())
+            return true;
+        return  false;
+    }
+
 }

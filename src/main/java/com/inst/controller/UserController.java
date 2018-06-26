@@ -34,9 +34,6 @@ public class UserController {
 	private ImageService imageService;
 
 	@Autowired
-	private SessionFactory sessionFactory;
-
-	@Autowired
 	public UserController(UserService userService, ImageService imageService) {
 		this.userService = userService;
 		this.imageService = imageService;
@@ -48,36 +45,6 @@ public class UserController {
 		model.addAttribute("currentUser", user);
 		model.addAttribute("user", user);
 		return "userPage";
-	}
-
-	@RequestMapping(value = "/registration", method = RequestMethod.GET)
-	public String registration() {
-		return "registration";
-	}
-
-	@RequestMapping(value = "/login")
-	public String login() {
-		return "login";
-	}
-
-	@RequestMapping(value = "/registration", method = RequestMethod.POST)
-	public String registration(@RequestParam("login") String login,
-							   @RequestParam("gender") String gender,
-							   @RequestParam("firstName") String firstName,
-							   @RequestParam("lastName") String lastName,
-							   @RequestParam("password") String password,
-							   @RequestParam("avatar") MultipartFile image) throws IOException {
-		User user = new User();
-		user.setLogin(login);
-		user.setFirstName(firstName);
-		user.setLastName(lastName);
-		user.setPassword(password);
-		user.setGender(gender);
-		user.setAvatar(image);
-
-		userService.create(user);
-
-		return "redirect:/";
 	}
 
 	@RequestMapping("/addImage")
@@ -105,19 +72,34 @@ public class UserController {
 
 		User user = userService.findById(Integer.parseInt(id));
 
+		if(userService.contains(currentUser.getFollowing(), user))
+			model.addAttribute("type", "unfollow");
+		else
+			model.addAttribute("type", "follow");
+
 		model.addAttribute("currentUser", currentUser);
 		model.addAttribute("user", user);
 		return "userPage";
 	}
 
-	@RequestMapping("/user/follow/{id}")
+	@RequestMapping("/user/{type}/{id}")
 	public String follow(@PathVariable("id") String id,
-						  @AuthenticationPrincipal User currentUser,
-						  Model model) {
+						 @PathVariable("type") String type,
+						 @AuthenticationPrincipal User currentUser,
+						 Model model) {
 		User user = userService.findById(Integer.parseInt(id));
-		userService.subscribe(currentUser, user);
+
+		if (type.equals("follow")) {
+			userService.subscribe(currentUser, user);
+			model.addAttribute("type", "unfollow");
+		}
+		else if(type.equals("unfollow")) {
+			userService.unsubscribe(currentUser, user);
+			model.addAttribute("type", "follow");
+		}
 
 		currentUser = userService.findById(currentUser.getId());
+		user = userService.findById(user.getId());
 
 		model.addAttribute("currentUser", currentUser);
 		model.addAttribute("user", user);
@@ -125,11 +107,10 @@ public class UserController {
 		return "userPage";
 	}
 
-	@RequestMapping("/user/{id}/{type}")
+	@RequestMapping("/user/list/{id}/{type}")
 	public String getList(@PathVariable("id") String id,
 						  @PathVariable("type") String type,
 						  Model model) {
-
 		User user =  userService.findById(Integer.parseInt(id));
 
 		if (type.equals("followers"))

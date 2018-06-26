@@ -24,8 +24,8 @@
       <div class="col-md-4" style="margin-top: 20px">
         <h4>
           Photos: ${fn:length(user.images)}
-          Followers: <a href="/user/${user.id}/followers">${fn:length(user.followers)}</a>
-          Following: <a href="/user/${user.id}/following">${fn:length(user.following)}</a>
+          Followers: <a href="/user/list/${user.id}/followers">${fn:length(user.followers)}</a>
+          Following: <a href="/user/list/${user.id}/following">${fn:length(user.following)}</a>
         </h4>
       </div>
     </div>
@@ -39,10 +39,13 @@
     </div>
   </form>
 </c:if>
+
+<c:if test="${currentUser.id ne user.id}">
   <br/>
-  <form action="/user/follow/${user.id}">
-    <input type="submit" value="Follow"/>
+  <form action="/user/${type}/${user.id}">
+    <input class="btn btn-info" type="submit" value="${type}"/>
   </form>
+</c:if>
   <c:forEach items="${user.images}" var="image">
     <img src="data:image/jpeg;base64,${image.content}" height="300" width="300"/>
   </c:forEach>
