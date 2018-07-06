@@ -66,11 +66,11 @@ public class UserController {
 	}
 
 	@RequestMapping("/user/{id}")
-	public String getUser(@PathVariable("id") String id,
+	public String getUser(@PathVariable("id") int id,
 						  @AuthenticationPrincipal User currentUser,
 						  Model model) {
 
-		User user = userService.findById(Integer.parseInt(id));
+		User user = userService.findById(id);
 
 		if(userService.contains(currentUser.getFollowing(), user))
 			model.addAttribute("type", "unfollow");
@@ -83,11 +83,11 @@ public class UserController {
 	}
 
 	@RequestMapping("/user/{type}/{id}")
-	public String follow(@PathVariable("id") String id,
+	public String follow(@PathVariable("id") int id,
 						 @PathVariable("type") String type,
 						 @AuthenticationPrincipal User currentUser,
 						 Model model) {
-		User user = userService.findById(Integer.parseInt(id));
+		User user = userService.findById(id);
 
 		if (type.equals("follow")) {
 			userService.subscribe(currentUser, user);
@@ -108,10 +108,10 @@ public class UserController {
 	}
 
 	@RequestMapping("/user/list/{id}/{type}")
-	public String getList(@PathVariable("id") String id,
+	public String getList(@PathVariable("id") int id,
 						  @PathVariable("type") String type,
 						  Model model) {
-		User user =  userService.findById(Integer.parseInt(id));
+		User user =  userService.findById(id);
 
 		if (type.equals("followers"))
 			model.addAttribute("users", user.getFollowers());

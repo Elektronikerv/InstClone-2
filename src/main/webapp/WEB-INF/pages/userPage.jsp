@@ -47,7 +47,9 @@
   </form>
 </c:if>
   <c:forEach items="${user.images}" var="image">
-    <img src="data:image/jpeg;base64,${image.content}" height="300" width="300"/>
+    <a href="/image/${image.id}">
+      <img src="data:image/jpeg;base64,${image.content}" height="300" width="300"/>
+    </a>
   </c:forEach>
   </div>
 </body>
