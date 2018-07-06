@@ -1,7 +1,7 @@
 package com.inst.repository.impl;
 
-import com.inst.entity.Image;
-import com.inst.repository.ImageRepository;
+import com.inst.entity.Like;
+import com.inst.repository.LikeRepository;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -9,22 +9,22 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Transactional
-public class ImageRepositoryImpl implements ImageRepository {
+public class LikeRepositoryImpl implements LikeRepository {
 
     private SessionFactory sessionFactory;
 
     @Autowired
-    public ImageRepositoryImpl(SessionFactory sessionFactory) {
+    public LikeRepositoryImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
     @Override
-    public void create(Image image) {
-        sessionFactory.getCurrentSession().save(image);
+    public void create(Like like) {
+        sessionFactory.getCurrentSession().save(like);
     }
 
     @Override
-    public Image findById(int i) {
-        return sessionFactory.getCurrentSession().get(Image.class, i);
+    public void delete(Like like) {
+        sessionFactory.getCurrentSession().delete(like);
     }
 }
