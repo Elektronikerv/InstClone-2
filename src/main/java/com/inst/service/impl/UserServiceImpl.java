@@ -1,6 +1,7 @@
 package com.inst.service.impl;
 
 import com.inst.entity.User;
+import com.inst.exception.EntityNotFoundException;
 import com.inst.repository.UserRepository;
 import com.inst.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,29 +25,41 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
+        if (login == null)
+            throw new EntityNotFoundException("Login is null");
         return userRepository.findUserByLogin(login);
     }
 
     @Override
     public void create(User user) {
+        if (user == null)
+            throw new EntityNotFoundException("User entity is null");
         userRepository.create(user);
     }
 
     @Override
     public User findById(int id) {
-       return  userRepository.findById(id);
+        if( id < 0)
+            throw new IllegalArgumentException("User id is less than 0");
+        return userRepository.findById(id);
     }
 
     @Override
     public List<User> searchUsersByLogin(String login) {
+        if(login == null)
+            throw new IllegalArgumentException("Image id is less than 0");
         return userRepository.searchUsersByLogin(login);
     }
 
     @Override
     @Transactional
     public void subscribe(User currentUser, User user) {
-        currentUser = userRepository.findById(currentUser.getId());
+        if (currentUser == null)
+            throw new EntityNotFoundException("CurrentUser entity is null");
+        if (user == null)
+            throw new EntityNotFoundException("User entity is null");
 
+        currentUser = userRepository.findById(currentUser.getId());
         if (currentUser != null) {
             currentUser.addFollowing(user);
         }
@@ -55,6 +68,11 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void unsubscribe(User currentUser, User user) {
+        if (currentUser == null)
+            throw new EntityNotFoundException("CurrentUser entity is null");
+        if (user == null)
+            throw new EntityNotFoundException("User entity is null");
+
         currentUser = userRepository.findById(currentUser.getId());
         user = userRepository.findById(user.getId());
 
