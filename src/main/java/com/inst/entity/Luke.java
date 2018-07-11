@@ -2,9 +2,10 @@ package com.inst.entity;
 
 import javax.persistence.*;
 
+// change entity name 'Like' to 'Luke' to deal with HQL queries
 @Entity
 @Table(name = "likes")
-public class Like {
+public class Luke {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

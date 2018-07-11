@@ -33,8 +33,7 @@ public class Image {
     @OneToMany(mappedBy = "image",
             cascade = CascadeType.ALL,
                fetch = FetchType.EAGER)
-//    @JoinColumn(name = "image_id")
-    private Set<Like> likes;
+    private Set<Luke> likes;
 
     public int getId() {
         return id;
@@ -69,11 +68,11 @@ public class Image {
         return createdOn;
     }
 
-    public Set<Like> getLikes() {
+    public Set<Luke> getLikes() {
         return likes;
     }
 
-    public void setLikes(Set<Like> likes) {
+    public void setLikes(Set<Luke> likes) {
         this.likes = likes;
     }
 
@@ -90,23 +89,23 @@ public class Image {
         return false;
     }
 
-    public void addLike(Like like) {
+    public void addLike(Luke like) {
         if (likes == null)
             likes = new HashSet<>();
         like.setImage(this);
         likes.add(like);
     }
 
-    public Like getLikeByUser(User user) {
-        Like searchedLike = null;
-        for (Like like : likes) {
+    public Luke getLikeByUser(User user) {
+        Luke searchedLike = null;
+        for (Luke like : likes) {
             if(like.getUser().getId() == user.getId())
                 searchedLike = like;
         }
         return searchedLike;
     }
 
-    public void removeLikeByUser(Like like) {
+    public void removeLikeByUser(Luke like) {
             likes.remove(like);
     }
 }

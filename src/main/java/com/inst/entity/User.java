@@ -1,6 +1,7 @@
 package com.inst.entity;
 
 import org.apache.commons.codec.binary.Base64;
+import org.hibernate.annotations.OrderBy;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.multipart.MultipartFile;
@@ -42,6 +43,7 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user",
                cascade = CascadeType.ALL,
                fetch = FetchType.EAGER)
+    @OrderBy(clause = "created_on DESC")
     private List<Image> images;
 
 
@@ -222,5 +224,6 @@ public class User implements UserDetails {
             return true;
         return  false;
     }
+
 
 }
