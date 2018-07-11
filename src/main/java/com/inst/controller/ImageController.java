@@ -1,7 +1,7 @@
 package com.inst.controller;
 
 import com.inst.entity.Image;
-import com.inst.entity.Like;
+import com.inst.entity.Luke;
 import com.inst.entity.User;
 import com.inst.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @Controller
 public class ImageController {
@@ -43,19 +45,27 @@ public class ImageController {
                             @AuthenticationPrincipal User user) {
         Image image = imageService.findById(id);
         if (type.equals("like")) {
-            Like like = new Like();
+            Luke like = new Luke();
             like.setUser(user);
             like.setImage(image);
             image.addLike(like);
             imageService.likeImage(like);
         }
         else if (type.equals("unlike")) {
-            Like like = image.getLikeByUser(user);
+            Luke like = image.getLikeByUser(user);
             image.removeLikeByUser(like);
             imageService.unlikeImage(like);
         }
 
         return "forward:/image/" + id;
+    }
+
+    @RequestMapping("image/{id}/likesList")
+    public String getLikesList(@PathVariable("id") int id,
+                               Model model) {
+        List<User> likers =  imageService.findAllImageLikers(id);
+        model.addAttribute("users", likers);
+        return "usersList";
     }
 
 }

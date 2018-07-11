@@ -2,10 +2,11 @@ package com.inst.service;
 
 
 import com.inst.entity.Image;
-import com.inst.entity.Like;
+import com.inst.entity.Luke;
 import com.inst.entity.User;
 
 import java.util.Collection;
+import java.util.List;
 
 public interface ImageService {
 
@@ -18,7 +19,9 @@ public interface ImageService {
 
     Image findById(int i);
 
-    void likeImage(Like like);
+    void likeImage(Luke like);
 
-    void unlikeImage(Like like);
+    void unlikeImage(Luke like);
+
+    List<User> findAllImageLikers(int imageId);
 }

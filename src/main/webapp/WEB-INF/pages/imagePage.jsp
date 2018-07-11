@@ -22,7 +22,9 @@
             <c:if test="${state eq 'unliked'}">
                 <a href="/image/like/${image.id}"><span class="glyphicon glyphicon-heart-empty"/></a>
             </c:if>
-            ${fn:length(image.likes)}
+            <a href="/image/${image.id}/likesList">
+                ${fn:length(image.likes)}
+            </a>
         </div>
     </div>
 </body>
