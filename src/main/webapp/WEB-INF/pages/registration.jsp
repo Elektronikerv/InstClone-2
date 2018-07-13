@@ -48,7 +48,6 @@
       <div class="form-group">
           <input class="btn btn-success form-control" type="submit" name="createAccount" value="Sign up">
         </div>
-
     </form>
   </div>
 </div>

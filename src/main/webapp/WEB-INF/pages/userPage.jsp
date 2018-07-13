@@ -31,6 +31,9 @@
     </div>
   </div>
 </div>
+  <div>
+    <a href="/user/update">Change profile</a>
+  </div>
 <c:if test="${currentUser.id eq user.id}">
   <form action="/addImage" class="form-inline" method="post" enctype="multipart/form-data">
     <div class="form-group">
