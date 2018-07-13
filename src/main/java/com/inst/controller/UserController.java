@@ -120,4 +120,26 @@ public class UserController {
 
 		return "usersList";
 	}
+
+	@RequestMapping(value = "/user/update", method = RequestMethod.GET)
+	public String getUpdatePage(@AuthenticationPrincipal User user, Model model) {
+		model.addAttribute("currentUser", user);
+		return "userEditPage";
+	}
+
+	@RequestMapping(value = "/user/update", method = RequestMethod.POST)
+	public String updateUser(@AuthenticationPrincipal User user,
+							 @RequestParam("login") String login,
+							 @RequestParam("firstName") String firstName,
+							 @RequestParam("lastName") String lastName,
+							 @RequestParam("avatar") MultipartFile image) throws IOException {
+		user.setLogin(login);
+		user.setFirstName(firstName);
+		user.setLastName(lastName);
+		if (!image.isEmpty())
+			user.setAvatar(image);
+
+		userService.update(user);
+		return "redirect:/";
+	}
 }
