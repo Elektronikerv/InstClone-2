@@ -47,4 +47,9 @@ public class UserRepositoryImpl implements UserRepository {
     public void delete(User user) {
         sessionFactory.getCurrentSession().delete(user);
     }
+
+    @Override
+    public void update(User user) {
+        sessionFactory.getCurrentSession().update(user);
+    }
 }

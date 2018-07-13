@@ -2,6 +2,7 @@ package com.inst.service;
 
 import com.inst.entity.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.List;
@@ -21,4 +22,6 @@ public interface UserService extends UserDetailsService {
 
     //    to deal with a hibernate contains method in persistSet bug
     boolean contains(Collection<User> list, User user);
+
+    void update(User user);
 }

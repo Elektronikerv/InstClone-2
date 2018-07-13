@@ -95,4 +95,12 @@ public class UserServiceImpl implements UserService {
         }
         return false;
     }
+
+    @Override
+    @Transactional
+    public void update(User user) {
+        if (user == null)
+            throw new EntityNotFoundException("User entity is null");
+        userRepository.update(user);
+    }
 }
