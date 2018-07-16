@@ -103,4 +103,14 @@ public class UserServiceImpl implements UserService {
             throw new EntityNotFoundException("User entity is null");
         userRepository.update(user);
     }
+
+    @Override
+    public void updatePassword(User user) {
+        if (user == null)
+            throw new EntityNotFoundException("User entity is null");
+
+        String encryptedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encryptedPassword);
+        this.update(user);
+    }
 }

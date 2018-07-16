@@ -24,4 +24,6 @@ public interface UserService extends UserDetailsService {
     boolean contains(Collection<User> list, User user);
 
     void update(User user);
+
+    void updatePassword(User user);
 }

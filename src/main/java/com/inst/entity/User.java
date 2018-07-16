@@ -67,7 +67,6 @@ public class User implements UserDetails {
     )
     private Set<User> followers;
 
-
     public int getId() {
         return id;
     }

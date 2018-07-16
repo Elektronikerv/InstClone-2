@@ -142,4 +142,17 @@ public class UserController {
 		userService.update(user);
 		return "redirect:/";
 	}
+
+	@RequestMapping("/user/changePassword")
+	public String getChangePasswordPage() {
+		return "changePassword";
+	}
+
+	@RequestMapping(value = "/user/changePassword", method = RequestMethod.POST)
+	public String changePassword(@AuthenticationPrincipal User user,
+								 @RequestParam("newPassword") String password) {
+		user.setPassword(password);
+		userService.updatePassword(user);
+		return "redirect:/";
+	}
 }
