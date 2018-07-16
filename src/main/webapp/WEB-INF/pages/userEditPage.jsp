@@ -12,9 +12,9 @@
   <%@include file="navbar.jsp"%>
   <div class="center">
     <div class="container">
-      <h3 class="text-center">Sign Up</h3>
+      <h3 class="text-center">Edit profile</h3>
+      <a href="/user/changePassword">Change password</a>
       <form method="POST" action="/user/update" encType="multipart/form-data">
-
         <div class="form-group">
           <label for="login">Login</label>
           <input class="form-control" type="text" id="login" name="login" value="${currentUser.login}" required>
