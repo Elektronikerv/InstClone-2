@@ -28,7 +28,7 @@ REFERENCES users(id);
 CREATE TABLE user_subscriptions (
   follower_id INT NOT NULL,
   following_id INT NOT NULL,
-  c(follower_id, following_id)
+  PRIMARY KEY(follower_id, following_id)
 );
 
 ALTER TABLE user_subscriptions
@@ -51,5 +51,21 @@ ADD FOREIGN KEY (image_id)
 REFERENCES images;
 
 ALTER TABLE likes
+ADD FOREIGN KEY (user_id)
+REFERENCES users;
+
+CREATE TABLE comments (
+  id SERIAL PRIMARY KEY NOT NULL,
+  text VARCHAR(255) NOT NULL,
+  image_id INT NOT NULL,
+  user_id INT NOT NULL,
+  created_on TIMESTAMP NOT NULL
+);
+
+ALTER TABLE comments
+ADD FOREIGN KEY (image_id)
+REFERENCES images;
+
+ALTER TABLE comments
 ADD FOREIGN KEY (user_id)
 REFERENCES users;
