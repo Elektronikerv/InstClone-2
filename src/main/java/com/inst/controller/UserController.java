@@ -47,21 +47,12 @@ public class UserController {
 		return "userPage";
 	}
 
-	@RequestMapping("/addImage")
-	public String addImage(@AuthenticationPrincipal User user,
-						   @RequestParam("newImage") MultipartFile file) throws IOException {
-		Image image = new Image();
-		image.setContent(file);
-		image.setUser(user);
-		imageService.create(image);
-
-		return "redirect:/";
-	}
-
 	@RequestMapping("/search")
-	public String getUsersList(@RequestParam("searchUserLogin") String login, Model model) {
+	public String getUsersList(@AuthenticationPrincipal User user,
+							   @RequestParam("searchUserLogin") String login, Model model) {
 		List<User> users = userService.searchUsersByLogin(login);
 		model.addAttribute("users", users);
+		model.addAttribute("currentUser", user);
 		return "usersList";
 	}
 
@@ -108,7 +99,8 @@ public class UserController {
 	}
 
 	@RequestMapping("/user/list/{id}/{type}")
-	public String getList(@PathVariable("id") int id,
+	public String getList(@AuthenticationPrincipal User currentUser,
+						  @PathVariable("id") int id,
 						  @PathVariable("type") String type,
 						  Model model) {
 		User user =  userService.findById(id);
@@ -118,6 +110,7 @@ public class UserController {
 		else if(type.equals("following"))
 			model.addAttribute("users", user.getFollowing());
 
+		model.addAttribute("currentUser", currentUser);
 		return "usersList";
 	}
 
@@ -144,7 +137,8 @@ public class UserController {
 	}
 
 	@RequestMapping("/user/changePassword")
-	public String getChangePasswordPage() {
+	public String getChangePasswordPage(@AuthenticationPrincipal User user, Model model) {
+		model.addAttribute("currentUser", user);
 		return "changePassword";
 	}
 

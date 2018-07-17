@@ -1,5 +1,6 @@
 package com.inst.controller;
 
+import com.inst.entity.Comment;
 import com.inst.entity.Image;
 import com.inst.entity.Luke;
 import com.inst.entity.User;
@@ -10,7 +11,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -60,7 +65,7 @@ public class ImageController {
         return "forward:/image/" + id;
     }
 
-    @RequestMapping("image/{id}/likesList")
+    @RequestMapping("/image/{id}/likesList")
     public String getLikesList(@PathVariable("id") int id,
                                Model model) {
         List<User> likers =  imageService.findAllImageLikers(id);
@@ -68,4 +73,38 @@ public class ImageController {
         return "usersList";
     }
 
+    @RequestMapping(value = "image/comment", method = RequestMethod.POST)
+    public String commentImage(@RequestParam("id") int id,
+                               @RequestParam("text") String text,
+                               @AuthenticationPrincipal User user) {
+
+        Comment comment = new Comment();
+        comment.setText(text);
+        Image image = imageService.findById(id);
+
+        comment.setUser(user);
+        image.addComment(comment);
+        imageService.commentImage(comment);
+
+        return "redirect:/image/" + id;
+    }
+
+    @RequestMapping("/image/add")
+    public String addImagePage(@AuthenticationPrincipal User user, Model model) {
+        model.addAttribute("currentUser", user);
+        return "addImage";
+    }
+
+
+    @RequestMapping(value = "/image/add", method = RequestMethod.POST)
+    public String addImage(@AuthenticationPrincipal User user,
+                           @RequestParam("newImage") MultipartFile file,
+                           @RequestParam("description") String description) throws IOException {
+        Image image = new Image();
+        image.setContent(file);
+        image.setUser(user);
+        imageService.create(image);
+
+        return "redirect:/";
+    }
 }
