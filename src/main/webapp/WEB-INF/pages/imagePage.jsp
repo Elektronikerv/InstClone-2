@@ -14,8 +14,6 @@
             <img src="data:image/jpeg;base64,${image.content}" height="700" width="700"/>
         </div>
         <div class="col-md-4">
-            <h4>Comments will be soon</h4>
-            <br>
             <c:if test="${state eq 'liked'}">
                 <a href="/image/unlike/${image.id}"><span class="glyphicon glyphicon-heart"/></a>
             </c:if>
@@ -25,6 +23,24 @@
             <a href="/image/${image.id}/likesList">
                 ${fn:length(image.likes)}
             </a>
+
+        <c:forEach items="${image.comments}" var="comment">
+            <div style="border: solid; border-width: 1px; margin: 2px; border-color: #8b8787;">
+                    ${comment.text}
+                <br>
+                <small style="">
+                    ${comment.user.login} ${comment.createdOn}
+                </small>
+            </div>
+        </c:forEach>
+        <div>
+            <form class="form" method="post" action="/image/comment">
+                <textarea class="form-control" placeholder="Comment here" name="text"></textarea>
+
+                <input type="text" value="${image.id}" name="id" hidden="true"/>
+                <input class="form-control btn btn-success" type="submit" value="Comment" />
+            </form>
+        </div>
         </div>
     </div>
 </body>

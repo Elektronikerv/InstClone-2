@@ -31,17 +31,6 @@
     </div>
   </div>
 </div>
-  <div>
-    <a href="/user/update">Edit profile</a>
-  </div>
-<c:if test="${currentUser.id eq user.id}">
-  <form action="/addImage" class="form-inline" method="post" enctype="multipart/form-data">
-    <div class="form-group">
-      <input type="file"  name="newImage" id="newImage" accept="image/*"/>
-      <input class="btn btn-default" type="submit" value="add"/>
-    </div>
-  </form>
-</c:if>
 
 <c:if test="${currentUser.id ne user.id}">
   <br/>
