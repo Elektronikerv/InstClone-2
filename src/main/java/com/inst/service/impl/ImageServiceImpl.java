@@ -1,9 +1,11 @@
 package com.inst.service.impl;
 
+import com.inst.entity.Comment;
 import com.inst.entity.Image;
 import com.inst.entity.Luke;
 import com.inst.entity.User;
 import com.inst.exception.EntityNotFoundException;
+import com.inst.repository.CommentRepository;
 import com.inst.repository.ImageRepository;
 import com.inst.repository.LikeRepository;
 import com.inst.service.ImageService;
@@ -19,11 +21,13 @@ public class ImageServiceImpl implements ImageService {
 
     private ImageRepository imageRepository;
     private LikeRepository likeRepository;
+    private CommentRepository commentRepository;
 
     @Autowired
-    public ImageServiceImpl(ImageRepository imageRepository, LikeRepository likeRepository) {
+    public ImageServiceImpl(ImageRepository imageRepository, LikeRepository likeRepository, CommentRepository commentRepository) {
         this.imageRepository = imageRepository;
         this.likeRepository = likeRepository;
+        this.commentRepository = commentRepository;
     }
 
 
@@ -83,4 +87,12 @@ public class ImageServiceImpl implements ImageService {
 
         return likeRepository.findAllImageLikers(image);
     }
+
+    @Override
+    public void commentImage(Comment comment) {
+        if (comment == null)
+            throw new EntityNotFoundException("Comment entity is null");
+        commentRepository.create(comment);
+    }
+
 }

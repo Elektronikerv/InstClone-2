@@ -3,7 +3,7 @@ package com.inst.entity;
 import org.apache.commons.codec.binary.Base64;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.web.multipart.MultipartFile;
-
+import org.hibernate.annotations.OrderBy;
 import javax.persistence.*;
 import java.io.IOException;
 import java.sql.Timestamp;
@@ -31,9 +31,15 @@ public class Image {
     private Timestamp createdOn;
 
     @OneToMany(mappedBy = "image",
-            cascade = CascadeType.ALL,
+               cascade = CascadeType.ALL,
                fetch = FetchType.EAGER)
     private Set<Luke> likes;
+
+    @OneToMany(mappedBy = "image",
+               cascade = CascadeType.ALL,
+               fetch = FetchType.EAGER)
+    @OrderBy(clause = "created_on ASC")
+    private Set<Comment> comments;
 
     public int getId() {
         return id;
@@ -76,6 +82,14 @@ public class Image {
         this.likes = likes;
     }
 
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -103,6 +117,13 @@ public class Image {
                 searchedLike = like;
         }
         return searchedLike;
+    }
+
+    public void addComment(Comment comment) {
+        if (comments == null)
+            comments = new HashSet<>();
+        comment.setImage(this);
+        comments.add(comment);
     }
 
     public void removeLikeByUser(Luke like) {

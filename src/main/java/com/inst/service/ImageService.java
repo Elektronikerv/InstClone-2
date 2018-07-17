@@ -1,6 +1,7 @@
 package com.inst.service;
 
 
+import com.inst.entity.Comment;
 import com.inst.entity.Image;
 import com.inst.entity.Luke;
 import com.inst.entity.User;
@@ -24,4 +25,6 @@ public interface ImageService {
     void unlikeImage(Luke like);
 
     List<User> findAllImageLikers(int imageId);
+
+    void commentImage(Comment comment);
 }
