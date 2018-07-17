@@ -103,6 +103,7 @@ public class ImageController {
         Image image = new Image();
         image.setContent(file);
         image.setUser(user);
+        image.setDescription(description);
         imageService.create(image);
 
         return "redirect:/";
