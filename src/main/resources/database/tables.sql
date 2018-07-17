@@ -16,6 +16,7 @@ CREATE TABLE images
 (
   id SERIAL PRIMARY KEY NOT NULL,
   content OID NOT NULL,
+  description VARCHAR(255),
   user_id INT NOT NULL,
   created_on TIMESTAMP NOT NULL
 );

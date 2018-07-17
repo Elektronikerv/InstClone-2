@@ -22,6 +22,9 @@ public class Image {
     @Column(name = "content")
     private String content;
 
+    @Column(name = "description")
+    private String description;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -88,6 +91,14 @@ public class Image {
 
     public void setComments(Set<Comment> comments) {
         this.comments = comments;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
