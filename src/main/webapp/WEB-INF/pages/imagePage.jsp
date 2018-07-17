@@ -14,6 +14,9 @@
             <img src="data:image/jpeg;base64,${image.content}" height="700" width="700"/>
         </div>
         <div class="col-md-4">
+            <div>
+                ${image.description}
+            </div>
             <c:if test="${state eq 'liked'}">
                 <a href="/image/unlike/${image.id}"><span class="glyphicon glyphicon-heart"/></a>
             </c:if>

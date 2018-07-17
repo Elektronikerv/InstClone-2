@@ -16,7 +16,7 @@
       </form>
       <ul class="nav navbar-nav navbar-right">
         <c:if test="${!empty currentUser}">
-          <li><a href="/image/add"><span class="glyphicon glyphicon-pencil"></span></a></li>
+          <li><a href="/image/add"><span class="glyphicon glyphicon-plus"></span></a></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
               Profile<span class="caret"></span>

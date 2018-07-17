@@ -9,7 +9,7 @@
 </head>
 
 <%@include file="navbar.jsp" %>
-<body style="background: #6f472f">
+<body style="background: #8b8787">
 <div class="container">
   <div class="col-lg-4"></div>
   <div class="col-lg-4">
