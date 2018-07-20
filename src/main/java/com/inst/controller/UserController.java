@@ -1,29 +1,19 @@
 package com.inst.controller;
 
-import com.inst.entity.Image;
 import com.inst.entity.User;
 import com.inst.service.ImageService;
 import com.inst.service.UserService;
-import org.apache.commons.codec.binary.Base64;
-import org.hibernate.Hibernate;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.annotation.MultipartConfig;
 import java.io.IOException;
-import java.security.Principal;
-import java.sql.Blob;
 import java.util.List;
 
 @Controller
@@ -122,11 +112,9 @@ public class UserController {
 
 	@RequestMapping(value = "/user/update", method = RequestMethod.POST)
 	public String updateUser(@AuthenticationPrincipal User user,
-							 @RequestParam("login") String login,
 							 @RequestParam("firstName") String firstName,
 							 @RequestParam("lastName") String lastName,
 							 @RequestParam("avatar") MultipartFile image) throws IOException {
-		user.setLogin(login);
 		user.setFirstName(firstName);
 		user.setLastName(lastName);
 		if (!image.isEmpty())
