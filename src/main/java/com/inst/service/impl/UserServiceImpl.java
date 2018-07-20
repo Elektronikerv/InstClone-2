@@ -27,10 +27,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String login) {
         if (login == null)
             throw new EntityNotFoundException("Login is null");
-        return userRepository.findUserByLogin(login);
+        User user;
+        try {
+            user = userRepository.findUserByLogin(login);
+        } catch (UsernameNotFoundException e) {
+            return null;
+        }
+        return user;
     }
 
     @Override

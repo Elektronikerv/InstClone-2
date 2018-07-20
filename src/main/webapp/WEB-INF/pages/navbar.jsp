@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link rel="stylesheet" href="/resources/css/page.css"/>
 
 <nav class="navbar navbar-default">
   <div class="container-fluid">
@@ -6,9 +7,7 @@
       <a class="navbar-brand" href="/">InstClone</a>
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <form class="navbar-form" style="position: absolute; width: 100%;left: 0;
-                                      text-align: center;
-                                      margin:6px auto;">
+      <form class="navbar-form n-form">
         <div class="form-group">
           <input  type="text" name="searchUserLogin" class="form-control" placeholder="Search">
         </div>

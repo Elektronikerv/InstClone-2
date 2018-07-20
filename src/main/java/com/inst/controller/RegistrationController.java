@@ -4,6 +4,7 @@ import com.inst.entity.User;
 import com.inst.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,7 +38,14 @@ public class RegistrationController {
                                @RequestParam("firstName") String firstName,
                                @RequestParam("lastName") String lastName,
                                @RequestParam("password") String password,
-                               @RequestParam("avatar") MultipartFile image) throws IOException {
+                               @RequestParam("avatar") MultipartFile image,
+                               Model model) throws IOException {
+
+        if (userService.loadUserByUsername(login) != null) {
+            model.addAttribute("uniqueError", true);
+            return "registration";
+        }
+
         User user = new User();
         user.setLogin(login);
         user.setFirstName(firstName);

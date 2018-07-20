@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -20,8 +21,12 @@
 
       <div class="form-group">
           <label for="login">Login</label>
-          <input class="form-control" type="text" id="login" name="login" required>
-        </div>
+          <input class="form-control" type="text" id="login" name="login"
+                 pattern=".{4,32}" title="4-32 characters" required>
+          <c:if test="${uniqueError eq true}">
+            <small style="color: red">This login is already exists</small>
+          </c:if>
+      </div>
 
         <div class="form-group">
             <label for="firstName">First name</label>
@@ -34,11 +39,12 @@
         </div>
       <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" class="form-control" id="password" name="password" required>
+          <input type="password" class="form-control" id="password" name="password" pattern=".{6,32}"
+                 title="6-32 characters" required>
       </div>
       <div class="form-group">
         <label for="gender">Gender:</label>
-          <input type="radio" id="gender" name="gender" value="m">Male
+          <input type="radio" id="gender" name="gender" value="m" required>Male
           <input type="radio" name="gender" value="f">Female
       </div>
       <div class="form-group">

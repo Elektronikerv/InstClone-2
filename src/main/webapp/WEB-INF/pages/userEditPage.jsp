@@ -15,10 +15,6 @@
       <h3 class="text-center">Edit profile</h3>
       <form method="POST" action="/user/update" encType="multipart/form-data">
         <div class="form-group">
-          <label for="login">Login</label>
-          <input class="form-control" type="text" id="login" name="login" value="${currentUser.login}" required>
-        </div>
-        <div class="form-group">
           <label for="firstName">First name</label>
           <input class="form-control" type="text" id="firstName" name="firstName" value="${currentUser.firstName}" required>
         </div>
