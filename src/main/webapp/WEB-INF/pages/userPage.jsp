@@ -15,7 +15,7 @@
   <div class="row">
     <div class="col-md-2">
         <img class="img-circle" src="data:image/jpeg;base64,${user.avatar}"
-         title="change avatar" height="150" width="150"  hspace="20" vspace="20">
+         title="avatar" height="150" width="150"  hspace="20" vspace="20">
     </div>
     <div class="row" style="margin-left: 50px; margin-top: 75px">
       <div class="col-md-2">

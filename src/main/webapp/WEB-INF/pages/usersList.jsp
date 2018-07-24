@@ -8,6 +8,9 @@
 </head>
 <body>
 <jsp:include page="navbar.jsp"/>
+  <%--<c:if test="${users eq null}">--%>
+    <%--<h4 class="text-center">No users found</h4>--%>
+  <%--</c:if>--%>
   <c:forEach var="searchUser" items="${users}">
     <div class="container-fluid">
       <div class="row">

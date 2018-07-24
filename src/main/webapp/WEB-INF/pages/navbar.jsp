@@ -7,7 +7,7 @@
       <a class="navbar-brand" href="/">InstClone</a>
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <form class="navbar-form n-form">
+      <form class="navbar-form n-form" action="/search">
         <div class="form-group">
           <input  type="text" name="searchUserLogin" class="form-control" placeholder="Search">
         </div>
@@ -21,6 +21,7 @@
               Profile<span class="caret"></span>
             </a>
           <ul class="dropdown-menu">
+            <li><a href="/user">See profile</li>
             <li><a href="/user/update">Edit profile</a></li>
             <li><a href="/user/changePassword">Change password</a></li>
           </ul>
