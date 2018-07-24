@@ -95,4 +95,8 @@ public class ImageServiceImpl implements ImageService {
         commentRepository.create(comment);
     }
 
+    @Override
+    public List<Image> findAllFollowingImages(User user) {
+        return imageRepository.findAllFollowingImages(user);
+    }
 }

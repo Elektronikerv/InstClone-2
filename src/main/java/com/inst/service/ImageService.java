@@ -27,4 +27,6 @@ public interface ImageService {
     List<User> findAllImageLikers(int imageId);
 
     void commentImage(Comment comment);
+
+    List<Image> findAllFollowingImages(User user);
 }

@@ -96,7 +96,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean contains(Collection<User> list, User user) {
         for (User u : list) {
-            if( u.equals(user))
+            if(u.getId() == user.getId())
                 return true;
         }
         return false;
