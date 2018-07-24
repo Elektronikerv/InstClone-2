@@ -12,6 +12,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "images")
+
 public class Image {
 
     @Id
@@ -139,5 +140,15 @@ public class Image {
 
     public void removeLikeByUser(Luke like) {
             likes.remove(like);
+    }
+
+    @Override
+    public String toString() {
+        return "Image{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                ", user.id=" + user.getId() +
+                ", createdOn=" + createdOn +
+                '}';
     }
 }

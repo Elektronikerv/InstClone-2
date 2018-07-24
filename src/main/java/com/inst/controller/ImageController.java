@@ -62,7 +62,7 @@ public class ImageController {
             imageService.unlikeImage(like);
         }
 
-        return "forward:/image/" + id;
+        return "redirect:/image/" + id;
     }
 
     @RequestMapping("/image/{id}/likesList")
@@ -90,7 +90,7 @@ public class ImageController {
     }
 
     @RequestMapping("/image/add")
-    public String addImagePage(@AuthenticationPrincipal User user, Model model) {
+    public String getaddImagePage(@AuthenticationPrincipal User user, Model model) {
         model.addAttribute("currentUser", user);
         return "addImage";
     }
