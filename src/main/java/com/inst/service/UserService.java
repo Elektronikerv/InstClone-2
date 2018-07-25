@@ -26,4 +26,6 @@ public interface UserService extends UserDetailsService {
     void update(User user);
 
     void updatePassword(User user);
+
+    void delete(User user);
 }

@@ -147,4 +147,12 @@ public class UserController {
 		userService.updatePassword(user);
 		return "redirect:/";
 	}
+
+	@RequestMapping("/user/delete")
+	public String delete(@AuthenticationPrincipal User user) {
+
+		userService.delete(user);
+
+		return "redirect:/logout";
+	}
 }

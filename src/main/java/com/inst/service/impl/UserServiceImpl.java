@@ -2,6 +2,7 @@ package com.inst.service.impl;
 
 import com.inst.entity.User;
 import com.inst.exception.EntityNotFoundException;
+import com.inst.exception.NoAccessException;
 import com.inst.repository.UserRepository;
 import com.inst.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -128,5 +129,13 @@ public class UserServiceImpl implements UserService {
         String encryptedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encryptedPassword);
         this.update(user);
+    }
+
+    @Override
+    public void delete(User user) {
+        if (user == null)
+            throw new EntityNotFoundException("User with id " + user.getId() + " does not exists");
+
+        userRepository.delete(user);
     }
 }

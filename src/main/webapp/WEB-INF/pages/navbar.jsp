@@ -21,7 +21,7 @@
               Profile<span class="caret"></span>
             </a>
           <ul class="dropdown-menu">
-            <li><a href="/user">See profile</li>
+            <li><a href="/user">See profile</a></li>
             <li><a href="/user/update">Edit profile</a></li>
             <li><a href="/user/changePassword">Change password</a></li>
           </ul>

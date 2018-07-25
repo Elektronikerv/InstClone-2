@@ -29,6 +29,7 @@
         <div class="form-group">
           <input class="btn btn-success form-control" type="submit" name="update" value="Update">
         </div>
+        <a href="/user/delete" class="form-control btn btn-danger">Delete profile</a>
       </form>
     </div>
   </div>
