@@ -5,6 +5,7 @@ import com.inst.entity.Image;
 import com.inst.entity.Luke;
 import com.inst.entity.User;
 import com.inst.exception.EntityNotFoundException;
+import com.inst.exception.NoAccessException;
 import com.inst.repository.CommentRepository;
 import com.inst.repository.ImageRepository;
 import com.inst.repository.LikeRepository;
@@ -44,7 +45,6 @@ public class ImageServiceImpl implements ImageService {
             if (i.getId() == image.getId())
                 return true;
         }
-
         return false;
     }
 
@@ -98,5 +98,14 @@ public class ImageServiceImpl implements ImageService {
     @Override
     public List<Image> findAllFollowingImages(User user) {
         return imageRepository.findAllFollowingImages(user);
+    }
+
+    @Override
+    public void delete(Image image, User user) {
+        if (this.contains(user.getImages(), image))
+            imageRepository.delete(image);
+        else {
+            throw new NoAccessException("User with id " + user.getId() + " try to delete another user image");
+        }
     }
 }

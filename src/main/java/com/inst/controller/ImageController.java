@@ -90,7 +90,7 @@ public class ImageController {
     }
 
     @RequestMapping("/image/add")
-    public String getaddImagePage(@AuthenticationPrincipal User user, Model model) {
+    public String getAddImagePage(@AuthenticationPrincipal User user, Model model) {
         model.addAttribute("currentUser", user);
         return "addImage";
     }
@@ -107,5 +107,14 @@ public class ImageController {
         imageService.create(image);
 
         return "redirect:/";
+    }
+
+    @RequestMapping(value = "/image/delete/{id}")
+    public String delete(@PathVariable("id") int id,
+                         @AuthenticationPrincipal User user) {
+        Image image = imageService.findById(id);
+        imageService.delete(image, user);
+
+        return "redirect:/user";
     }
 }

@@ -41,4 +41,9 @@ public class ImageRepositoryImpl implements ImageRepository {
         query.setParameter("follower_id", user.getId());
         return query.list();
     }
+
+    @Override
+    public void delete(Image image) {
+        sessionFactory.getCurrentSession().delete(image);
+    }
 }

@@ -29,4 +29,6 @@ public interface ImageService {
     void commentImage(Comment comment);
 
     List<Image> findAllFollowingImages(User user);
+
+    void delete(Image image, User user);
 }

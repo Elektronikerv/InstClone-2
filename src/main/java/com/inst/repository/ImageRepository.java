@@ -12,4 +12,6 @@ public interface ImageRepository {
     Image findById(int i);
 
     List findAllFollowingImages(User user);
+
+    void delete(Image image);
 }

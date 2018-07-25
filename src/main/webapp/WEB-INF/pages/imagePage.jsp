@@ -12,6 +12,7 @@
     <div class="container">
         <div class="col-md-8">
             <img src="data:image/jpeg;base64,${image.content}" height="700" width="700"/>
+            <a href="/image/delete/${image.id}"><span class="glyphicon glyphicon-remove"/></a>
         </div>
         <div class="col-md-4">
             <div>
