@@ -30,5 +30,5 @@ public interface ImageService {
 
     List<Image> findAllFollowingImages(User user);
 
-    void delete(Image image, User user);
+    void delete(int id, User user);
 }

@@ -112,9 +112,7 @@ public class ImageController {
     @RequestMapping(value = "/image/delete/{id}")
     public String delete(@PathVariable("id") int id,
                          @AuthenticationPrincipal User user) {
-        Image image = imageService.findById(id);
-        imageService.delete(image, user);
-
+        imageService.delete(id, user);
         return "redirect:/user";
     }
 }

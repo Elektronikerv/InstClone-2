@@ -101,11 +101,14 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public void delete(Image image, User user) {
-        if (this.contains(user.getImages(), image))
-            imageRepository.delete(image);
-        else {
+    public void delete(int id, User user) {
+        Image image = this.findById(id);
+        if (image == null)
+            throw new EntityNotFoundException("Image with id " + id + " does not exists");
+
+        if (!this.contains(user.getImages(), image))
             throw new NoAccessException("User with id " + user.getId() + " try to delete another user image");
-        }
+
+        imageRepository.delete(image);
     }
 }
