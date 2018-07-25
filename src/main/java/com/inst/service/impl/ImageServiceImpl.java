@@ -97,11 +97,17 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     public List<Image> findAllFollowingImages(User user) {
+        if (user == null)
+            throw new EntityNotFoundException("User entity is null");
+
         return imageRepository.findAllFollowingImages(user);
     }
 
     @Override
     public void delete(int id, User user) {
+        if (id < 0)
+            throw new IllegalArgumentException("Image id is less than 0");
+
         Image image = this.findById(id);
         if (image == null)
             throw new EntityNotFoundException("Image with id " + id + " does not exists");
