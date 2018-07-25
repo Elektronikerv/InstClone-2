@@ -5,6 +5,8 @@ import com.inst.exception.EntityNotFoundException;
 import com.inst.repository.UserRepository;
 import com.inst.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,10 +17,14 @@ import java.util.Collection;
 import java.util.List;
 
 @Service
+@PropertySource("classpath:user.properties")
 public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
     private BCryptPasswordEncoder passwordEncoder;
+
+    @Value("${user.default_avatar}")
+    private String DEFAULT_AVATAR;
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
@@ -34,6 +40,7 @@ public class UserServiceImpl implements UserService {
         try {
             user = userRepository.findUserByLogin(login);
         } catch (UsernameNotFoundException e) {
+            e.printStackTrace();
             return null;
         }
         return user;
@@ -41,10 +48,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void create(User user) {
-
         if (user == null)
             throw new EntityNotFoundException("User entity is null");
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        if (user.getAvatar().isEmpty())
+            user.setAvatar(DEFAULT_AVATAR);
+
         userRepository.create(user);
     }
 
