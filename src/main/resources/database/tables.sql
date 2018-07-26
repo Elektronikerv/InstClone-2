@@ -6,7 +6,8 @@ CREATE TABLE users
     first_name VARCHAR(255) NOT NULL,
     last_name VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
-    gender VARCHAR(1) NOT NULL
+    gender VARCHAR(1) NOT NULL,
+    avatar OID NULL
 );
 ALTER TABLE users
 ADD CONSTRAINT unique_login
