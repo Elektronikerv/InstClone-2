@@ -7,13 +7,7 @@
 </head>
 
 <body>
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="/">InstClone</a>
-    </div>
-  </div>
-</nav>
+<%@ include file="navbar.jsp"%>
 <div class="center">
   <div class="container">
     <h3 class="text-center">Sign Up</h3>
