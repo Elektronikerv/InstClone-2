@@ -106,7 +106,7 @@ public class ImageController {
         image.setDescription(description);
         imageService.create(image);
 
-        return "redirect:/";
+        return "redirect:/user";
     }
 
     @RequestMapping(value = "/image/delete/{id}")
