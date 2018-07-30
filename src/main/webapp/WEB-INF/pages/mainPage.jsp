@@ -8,37 +8,42 @@
 <head>
   <link rel="stylesheet" href="/resources/css/bootstrap.min.css"/>
   <link rel="stylesheet" href="/resources/css/page.css"/>
+  <link rel="stylesheet" href="/resources/css/mainPage.css">
 </head>
 <body>
 <%@include file="navbar.jsp"%>
 <div class="container">
   <div class="row">
-  <c:if test="${fn:length(images) eq 0}">
-    <h1 class="text-center">Follow someone</h1>
-  </c:if>
-  <c:forEach items="${images}" var="image">
-    <div class="col-md-1">
-      <a href="/user/${image.user.id}">
-        <img src="data:image/jpeg;base64,${image.user.avatar}" height="50" width="50" class="img-circle"/>
-      </a>
-    </div>
-    <div class="col-md-1">
-        <h4>${image.user.login}</h4>
-    </div>
-    <div class="col-md-12">
-      <a href="/image/${image.id}">
-        <img src="data:image/jpeg;base64,${image.content}" height="700" width="700"/>
-      </a>
-    </div>
-    <div class="col-md-12">
-      <div>
-          ${image.description}
+    <div class="col-md-7 col-md-offset-2">
+      <c:if test="${fn:length(images) eq 0}">
+        <h1 class="text-center">Follow someone with photos</h1>
+      </c:if>
+      <c:forEach items="${images}" var="image">
+        <div class="row">
+          <div class="col-md-1">
+          <a href="/user/${image.user.id}">
+            <img src="data:image/jpeg;base64,${image.user.avatar}" class="img-circle avatar-main"/>
+          </a>
+        </div>
+        <div class="col-md-1 login">
+          <h4>${image.user.login}</h4>
+        </div>
+        <div class="col-md-12">
+          <a href="/image/${image.id}">
+            <img src="data:image/jpeg;base64,${image.content}" class="image-main"/>
+          </a>
+        </div>
+        <div class="col-md-12">
+          <div class="desc">
+            <b>${image.user.login} </b>
+            ${image.description}
+          </div>
+        </div>
       </div>
-      <br/>
-      <br/>
-    </div>
   </c:forEach>
-</div>
+      </div>
+    <div class="col-md-2"></div>
+  </div>
 </div>
 </body>
 </html>

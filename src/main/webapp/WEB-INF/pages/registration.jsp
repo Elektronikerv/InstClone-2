@@ -18,7 +18,7 @@
           <input class="form-control" type="text" id="login" name="login"
                  pattern=".{4,32}" title="4-32 characters" required>
           <c:if test="${uniqueError eq true}">
-            <small style="color: red">This login is already exists</small>
+            <small class="error-message">This login is already exists</small>
           </c:if>
       </div>
 

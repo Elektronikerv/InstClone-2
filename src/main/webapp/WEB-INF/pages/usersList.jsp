@@ -5,6 +5,7 @@
 <html>
 <head>
   <link rel="stylesheet" href="/resources/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="/resources/css/usersList.css"/>
   <link rel="stylesheet" href="/resources/css/page.css"/>
 </head>
 <body>
@@ -12,18 +13,20 @@
   <c:if test="${fn:length(users) eq 0}">
     <h3 class="text-center">No users found</h3>
   </c:if>
-  <c:forEach var="searchUser" items="${users}">
-    <div class="container-fluid">
-      <div class="row">
-        <a href="/user/${searchUser.id}">
-        <div class="col-md-2"><img class="img-circle" src="data:image/jpeg;base64,${searchUser.avatar}"
-                                 title="change avatar" height="100" width="100"  hspace="20" vspace="20">
-        </div>
-        <div class="col-md-1 ">
-          <h4 style="margin-top: 50px">${searchUser.login}</h4></div>
+    <div class="container">
+      <c:forEach var="searchUser" items="${users}">
+        <div class="row">
+          <a href="/user/${searchUser.id}">
+            <div class="col-md-1">
+              <img class="img-circle img-small" src="data:image/jpeg;base64,${searchUser.avatar}"/>
+            </div>
+            <div class="col-md-1">
+              <h4 class="user-login">${searchUser.login}</h4>
+            </div>
           </a>
+          <div class="col-md-8"></div>
         </div>
+      </c:forEach>
     </div>
-  </c:forEach>
 </body>
 </html>

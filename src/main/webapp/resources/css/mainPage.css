@@ -1,0 +1,21 @@
+
+.avatar-main {
+    height: 50px !important;
+    width: 50px !important;
+    margin: 5px !important;
+}
+
+.login {
+    margin-top: 10px;
+    margin-left: 15px;
+}
+
+.image-main {
+    height: 700px;
+    width: 700px;
+
+}
+
+.desc {
+    margin-bottom: 20px;
+}

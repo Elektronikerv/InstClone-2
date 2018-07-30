@@ -6,16 +6,12 @@
     margin-bottom: 20px
 }
 
-.center-info {
-    margin-top: 70px;
-}
-
 .n-form {
     position: absolute;
     width: 100%;
     left: 0;
     text-align: center;
-    margin:6px auto;
+    margin: 6px auto;
 }
 
 img {
@@ -26,4 +22,12 @@ img {
     height: 300px;
     width: 300px;
     margin: 10px;
+}
+
+.login-form {
+    margin-top: 100px;
+}
+
+.error-message {
+    color: red;
 }

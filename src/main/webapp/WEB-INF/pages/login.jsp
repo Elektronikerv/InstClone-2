@@ -13,12 +13,12 @@
 <div class="container">
   <div class="col-lg-4"></div>
   <div class="col-lg-4">
-    <div class="jumbotron" style="margin-top: 100px; ">
+    <div class="jumbotron login-form" >
       <h2 class="text-center">Login</h2>
       <form action="login" method='POST'>
         <div class=" form-group">
           <c:if test="${param.error ne null}">
-            <div style="color: red">Invalid username or password</div>
+            <div class="error-message">Invalid username or password</div>
           </c:if>
           <label for='username'>User:</label>
           <div>

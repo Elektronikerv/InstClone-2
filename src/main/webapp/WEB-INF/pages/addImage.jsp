@@ -12,8 +12,10 @@
   <div class="form-group">
     <textarea class="form-control" placeholder="Description..." name="description"></textarea>
     <label for="newImage">Choose image</label>
-    <input  type="file"  name="newImage" id="newImage" accept="image/*" required/>
-    <input class="btn btn-default form-control" type="submit" value="add"/>
+    <div class="form-group">
+      <input  type="file"  name="newImage" id="newImage" accept="image/*" required/>
+    </div>
+      <input class="btn btn-success form-control" type="submit" value="add"/>
   </div>
 </form>
 </div>
