@@ -41,7 +41,7 @@ public class User implements UserDetails {
     private String avatar;
 
     @OneToMany(mappedBy = "user",
-               cascade = CascadeType.ALL,
+               cascade = {CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.PERSIST},
                fetch = FetchType.EAGER)
     @OrderBy(clause = "created_on DESC")
     private List<Image> images;

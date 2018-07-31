@@ -5,6 +5,7 @@ import com.inst.entity.Image;
 import com.inst.entity.Luke;
 import com.inst.entity.User;
 import com.inst.service.ImageService;
+import com.inst.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -22,9 +23,11 @@ import java.util.List;
 public class ImageController {
 
     private ImageService imageService;
+    private UserService userService;
 
     @Autowired
-    public ImageController(ImageService imageService) {
+    public ImageController(ImageService imageService, UserService userService) {
+        this.userService = userService;
         this.imageService = imageService;
     }
 
@@ -112,6 +115,7 @@ public class ImageController {
     @RequestMapping(value = "/image/delete/{id}")
     public String delete(@PathVariable("id") int id,
                          @AuthenticationPrincipal User user) {
+        user = userService.findById(user.getId());
         imageService.delete(id, user);
         return "redirect:/user";
     }
