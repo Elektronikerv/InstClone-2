@@ -21,17 +21,17 @@ import java.util.Properties;
 @EnableTransactionManagement
 public class HibernateConfig {
 
-//    @Value("${database.driverClassName}")
-//    private String driverClassName;
-//
-//    @Value("${database.username}")
-//    private String username;
-//
-//    @Value("${database.url}")
-//    private String url;
-//
-//    @Value("${database.password}")
-//    private String password;
+    @Value("${database.driverClassName}")
+    private String driverClassName;
+
+    @Value("${database.username}")
+    private String username;
+
+    @Value("${database.url}")
+    private String url;
+
+    @Value("${database.password}")
+    private String password;
 
     @Value("${database.hibernate.dialect}")
     private String dialect;
@@ -43,9 +43,9 @@ public class HibernateConfig {
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUsername(System.getenv("database.username"));
-        dataSource.setUrl(System.getenv("database.url"));
-        dataSource.setPassword(System.getenv("database.password"));
+        dataSource.setUsername(password);
+        dataSource.setUrl(url);
+        dataSource.setPassword(password);
         return  dataSource;
     }
 

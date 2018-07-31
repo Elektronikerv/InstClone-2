@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -jar target/dependency/webapp-runner.jar --port $PORT target/*.war --database.username=$DATABASE_USERNAME --database.url=$DATABASE_SHORT_URL --database.password=$DATABASE_PASSWORD
+web: java $JAVA_OPTS -jar target/dependency/webapp-runner.jar --port $PORT target/*.war
