@@ -6,6 +6,7 @@
 <head>
     <link rel="stylesheet" href="/resources/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/resources/css/imagePage.css"/>
+    <title>InstClone</title>
 </head>
 <body>
 <%@include file="navbar.jsp"%>

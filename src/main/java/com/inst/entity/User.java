@@ -156,15 +156,6 @@ public class User implements UserDetails {
         this.images = images;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", login='" + login + '\'' +
-                ", password='" + password + '\'' +
-                ", gender='" + gender + '\'' +
-                '}';
-    }
 
     public String getFirstName() {
         return firstName;
@@ -224,5 +215,13 @@ public class User implements UserDetails {
         return  false;
     }
 
-
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", gender='" + gender + '\'' +
+                '}';
+    }
 }

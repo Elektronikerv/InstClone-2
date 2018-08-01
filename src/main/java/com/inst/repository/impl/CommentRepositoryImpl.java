@@ -22,4 +22,14 @@ public class CommentRepositoryImpl implements CommentRepository {
     public void create(Comment comment) {
         sessionFactory.getCurrentSession().save(comment);
     }
+
+    @Override
+    public Comment findById(int id) {
+        return sessionFactory.getCurrentSession().get(Comment.class, id);
+    }
+
+    @Override
+    public void delete(Comment comment) {
+        sessionFactory.getCurrentSession().delete(comment);
+    }
 }

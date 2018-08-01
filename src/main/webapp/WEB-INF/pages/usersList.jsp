@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="/resources/css/bootstrap.min.css"/>
   <link rel="stylesheet" href="/resources/css/usersList.css"/>
   <link rel="stylesheet" href="/resources/css/page.css"/>
+  <title>InstClone</title>
 </head>
 <body>
 <jsp:include page="navbar.jsp"/>
