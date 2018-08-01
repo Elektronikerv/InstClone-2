@@ -42,8 +42,8 @@ public class ImageController {
         else
             model.addAttribute("state", "unliked");
 
-        model.addAttribute("image", image);
-        model.addAttribute("currentUser", user);
+        model.addAttribute("image", image)
+             .addAttribute("currentUser", user);
         return "imagePage";
     }
 
@@ -70,9 +70,12 @@ public class ImageController {
 
     @RequestMapping("/image/{id}/likesList")
     public String getLikesList(@PathVariable("id") int id,
+                               @AuthenticationPrincipal User user,
                                Model model) {
         List<User> likers =  imageService.findAllImageLikers(id);
-        model.addAttribute("users", likers);
+        model.addAttribute("users", likers)
+             .addAttribute("currentUser", user);
+
         return "usersList";
     }
 
